@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const session = require('express-session')
 // import routes
 const authRoutes = require('./routes/authRoute')
 const app = express()
@@ -12,7 +13,12 @@ const middleware = [
     morgan('dev'),
     express.static('public'),
     express.urlencoded({extended:true}),
-    express.json()
+    express.json(),
+    session({
+        secret : process.env.SECRET_KEY||'SECRET_KEY',
+        save : false,
+        saveUninitialized : false
+    })
 ]
 
 app.use(middleware)
