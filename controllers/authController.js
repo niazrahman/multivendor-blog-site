@@ -32,7 +32,7 @@ exports.signupPostController = async (req,res,next) => {
         })
         let createdUser = await user.save()
         console.log('User Created successfully!',createdUser)
-        res.render('pages/auth/signup', {title : "Create A New Account"})
+        res.render('pages/auth/signup', {title : "Create A New Account" , error : {}})
     }catch(e){
         console.log(e)
         next(e)
@@ -40,11 +40,16 @@ exports.signupPostController = async (req,res,next) => {
 }
 
 exports.loginGetController = (req,res,next) => {
-    res.render('pages/auth/login',{title:"Login to Your Account", error : {}})
+    let isLoggedIn = req.get('cookie').includes('isLoggedIn=true') ? true : false
+    res.render('pages/auth/login',{title:"Login to Your Account", error : {},isLoggedIn})
 }
 
 exports.loginPostController = async (req,res,next) =>{
     let {email, password} = req.body
+
+    let isLoggedIn = req.get('cookie').includes('isLoggedIn=true') ? true : false
+    res.render('pages/auth/login',{title:"Login to Your Account", error : {},isLoggedIn})
+
     let errors = validationResult(req).formatWith(errorFormatter)
     if(!errors.isEmpty()){
         return res.render('pages/auth/login', 
@@ -69,8 +74,8 @@ exports.loginPostController = async (req,res,next) =>{
             })
         }
 
-        console.log('successfully logged In',user)
-        res.render('pages/auth/login',{title:"Login to Your Account"})
+        res.setHeader('set-cookie','isLoggedIn=true')
+        res.render('pages/auth/login',{title:"Login to Your Account", error : {},isLoggedIn})
     }
     catch(e){
         console.log(e)
