@@ -3,6 +3,8 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
+// import middleware 
+const {bindUserWithRequest} = require('./middleware/authMiddleware')
 // import routes
 const authRoutes = require('./routes/authRoute')
 const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
@@ -26,7 +28,8 @@ const middleware = [
         save : false,
         saveUninitialized : false,
         store : store
-    })
+    }),
+    bindUserWithRequest()
 ]
 
 app.use(middleware)
