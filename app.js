@@ -8,6 +8,9 @@ const {bindUserWithRequest} = require('./middleware/authMiddleware')
 const setLocals = require('./middleware/setLocals')
 // import routes
 const authRoutes = require('./routes/authRoute')
+const dashboardRoutes = require('./routes/dashboardRoute')
+
+
 const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
 const store = new MongoDBStore({
     uri: MONGODB_URI,
@@ -36,6 +39,7 @@ const middleware = [
 
 app.use(middleware)
 app.use('/auth',authRoutes)
+app.use('/dashboard',dashboardRoutes)
 app.get('/', (req,res) => {
 
     res.json({
