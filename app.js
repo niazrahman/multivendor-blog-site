@@ -2,8 +2,15 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 // import routes
 const authRoutes = require('./routes/authRoute')
+const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
+const store = new MongoDBStore({
+    uri: MONGODB_URI,
+    collection: 'sessions',
+    expires: 1000 * 60 * 60 * 2
+  });
 const app = express()
 // setup view engine 
 app.set('view engine','ejs')
@@ -17,7 +24,8 @@ const middleware = [
     session({
         secret : process.env.SECRET_KEY||'SECRET_KEY',
         save : false,
-        saveUninitialized : false
+        saveUninitialized : false,
+        store : store
     })
 ]
 
@@ -31,7 +39,7 @@ app.get('/', (req,res) => {
 })
 
 const PORT = process.env.PORT || 3030
-mongoose.connect('mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority',{
+mongoose.connect(MONGODB_URI,{
     useNewUrlParser : true,
 })
 
