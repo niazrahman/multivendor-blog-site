@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
+const flash = require('connect-flash')
 // import middleware 
 const {bindUserWithRequest} = require('./middleware/authMiddleware')
 const setLocals = require('./middleware/setLocals')
@@ -10,6 +11,8 @@ const setLocals = require('./middleware/setLocals')
 const authRoutes = require('./routes/authRoute')
 const dashboardRoutes = require('./routes/dashboardRoute')
 
+// playground route
+const validatorRoute = require('./playground/validator') // should be removed
 
 const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
 const store = new MongoDBStore({
@@ -34,12 +37,14 @@ const middleware = [
         store : store
     }),
     bindUserWithRequest(),
-    setLocals()
+    setLocals(),
+    flash()
 ]
 
 app.use(middleware)
 app.use('/auth',authRoutes)
 app.use('/dashboard',dashboardRoutes)
+app.use('/playground',validatorRoute) // should be removed
 app.get('/', (req,res) => {
 
     res.json({
