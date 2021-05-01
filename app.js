@@ -6,6 +6,13 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
 const config = require('config')
+const chalk = require('chalk')
+
+const testConsole = require('debug')('app:test')
+const dbConsole = require('debug')('app:db')
+
+testConsole('This is a test console')
+dbConsole('This is a db console')
 
 // import middleware 
 const {bindUserWithRequest} = require('./middleware/authMiddleware')
@@ -74,9 +81,9 @@ mongoose.connect(MONGODB_URI,{
 })
 
 .then(() =>{
-    console.log('Database Connected')
+    console.log(chalk.green.inverse('Database Connected'))
     app.listen(PORT,() =>{
-        console.log(`SERVER IS RUNNING ON PORT ${PORT}`)
+        console.log(chalk.green.inverse(`SERVER IS RUNNING ON PORT ${PORT}`))
     })
 })
 .catch(e =>{
