@@ -26,7 +26,6 @@ app.set('view engine','ejs')
 app.set('views','views')
 // middleware array
 const middleware = [
-    morgan('dev'),
     express.static('public'),
     express.urlencoded({extended:true}),
     express.json(),
@@ -41,6 +40,11 @@ const middleware = [
     flash()
 ]
 
+// console.log(process.env.NODE_ENV)
+// console.log(app.get('env'))
+if(app.get('env')==='development'){
+    app.use(morgan('dev'))
+}
 app.use(middleware)
 app.use('/auth',authRoutes)
 app.use('/dashboard',dashboardRoutes)
