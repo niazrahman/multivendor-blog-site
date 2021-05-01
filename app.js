@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
+const dotEnv = require('dotenv')
 // import middleware 
 const {bindUserWithRequest} = require('./middleware/authMiddleware')
 const setLocals = require('./middleware/setLocals')
@@ -11,10 +12,14 @@ const setLocals = require('./middleware/setLocals')
 const authRoutes = require('./routes/authRoute')
 const dashboardRoutes = require('./routes/dashboardRoute')
 
+dotEnv.config({path:'./config.env'})
+
+console.log(process.env.DB_ADMIN)
+
 // playground route
 // const validatorRoute = require('./playground/validator') // should be removed
 
-const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
+const MONGODB_URI = `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority`
 const store = new MongoDBStore({
     uri: MONGODB_URI,
     collection: 'sessions',
@@ -43,7 +48,7 @@ const middleware = [
 // console.log(process.env.NODE_ENV)
 // console.log(app.get('env'))
 if(app.get('env')==='development'){
-    app.use(morgan('dev'))
+    app.use(morgan())
 }
 app.use(middleware)
 app.use('/auth',authRoutes)
