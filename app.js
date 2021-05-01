@@ -12,7 +12,7 @@ const authRoutes = require('./routes/authRoute')
 const dashboardRoutes = require('./routes/dashboardRoute')
 
 // playground route
-const validatorRoute = require('./playground/validator') // should be removed
+// const validatorRoute = require('./playground/validator') // should be removed
 
 const MONGODB_URI = 'mongodb://admin:admin@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority'
 const store = new MongoDBStore({
@@ -44,7 +44,7 @@ const middleware = [
 app.use(middleware)
 app.use('/auth',authRoutes)
 app.use('/dashboard',dashboardRoutes)
-app.use('/playground',validatorRoute) // should be removed
+// app.use('/playground',validatorRoute) // should be removed
 app.get('/', (req,res) => {
 
     res.json({
@@ -55,6 +55,7 @@ app.get('/', (req,res) => {
 const PORT = process.env.PORT || 3030
 mongoose.connect(MONGODB_URI,{
     useNewUrlParser : true,
+    useUnifiedTopology: true 
 })
 
 .then(() =>{
