@@ -26,6 +26,17 @@ setMiddleware(app)
 // Using routes from route directory
 setRoutes(app)
 
+app.use((req,res,next) =>{
+    let error = new Error ('404 page not found')
+    error.status = 404
+    next(error)
+})
+
+app.use((error,req,res,next)=>{
+    if(error.status===404){
+        return res.render('pages/error/404',{flashMessage : {}})
+    }
+})
 const PORT = process.env.PORT || 3030
 mongoose.connect(MONGODB_URI,{
     useNewUrlParser : true,
