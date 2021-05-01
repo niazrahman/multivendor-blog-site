@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
+const config = require('config')
 
 // import middleware 
 const {bindUserWithRequest} = require('./middleware/authMiddleware')
@@ -45,15 +46,16 @@ const middleware = [
     flash()
 ]
 
+console.log(config.get('name'))
 // console.log(process.env.NODE_ENV)
 // console.log(app.get('env'))
-if(app.get('env')==='development'){
-    app.use(morgan())
+if(process.env.NODE_ENV==='development'){
+    app.use(morgan('dev'))
 }
-const config = require('./config/config')
-if(app.get('env')==='development'){
-    console.log(config.dev.name)
-}
+// const config = require('./config/config')
+// if(app.get('env')==='development'){
+//     console.log(config.dev.name)
+// }
 app.use(middleware)
 app.use('/auth',authRoutes)
 app.use('/dashboard',dashboardRoutes)

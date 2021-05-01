@@ -4,13 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "start:prod": "set NODE_ENV=production&nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "config": "^3.3.6",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.4.1",
     "dotenv": "^8.2.0",
