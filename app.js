@@ -1,10 +1,11 @@
+const dotEnv = require('dotenv')
 const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
-const dotEnv = require('dotenv')
+
 // import middleware 
 const {bindUserWithRequest} = require('./middleware/authMiddleware')
 const setLocals = require('./middleware/setLocals')
@@ -14,7 +15,6 @@ const dashboardRoutes = require('./routes/dashboardRoute')
 
 dotEnv.config({path:'./config.env'})
 
-console.log(process.env.DB_ADMIN)
 
 // playground route
 // const validatorRoute = require('./playground/validator') // should be removed
@@ -49,6 +49,10 @@ const middleware = [
 // console.log(app.get('env'))
 if(app.get('env')==='development'){
     app.use(morgan())
+}
+const config = require('./config/config')
+if(app.get('env')==='development'){
+    console.log(config.dev.name)
 }
 app.use(middleware)
 app.use('/auth',authRoutes)
