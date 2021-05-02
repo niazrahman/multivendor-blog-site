@@ -1,11 +1,15 @@
 const router = require('express').Router();
 const {isAuthenticated} = require('../middleware/authMiddleware')
-const {dashboardGetController} = require('../controllers/dashboardController')
+const {
+    dashboardGetController,
+    createProfileGetController,
+    createProfilePostController,
+    editProfileGetController,
+    editProfilePostController
+} = require('../controllers/dashboardController')
 router.get('/',isAuthenticated,dashboardGetController)
-
-router.get('/create-profile')
-router.post('/create-profile')
-
-router.get('/edit-profile')
-router.post('/edit-profile')
+router.get('/create-profile',isAuthenticated,createProfileGetController)
+router.post('/create-profile',isAuthenticated,createProfilePostController)
+router.get('/edit-profile',isAuthenticated,editProfileGetController)
+router.get('/edit-profile',isAuthenticated,editProfilePostController)
 module.exports = router

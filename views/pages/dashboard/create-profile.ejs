@@ -1,0 +1,99 @@
+<%- include('../../partials/head.ejs') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card card-body my-5">
+                    <h4><%= title %></h4>
+                    <div class="profile-pics">
+                        <img src="<%= user.profilePics%>" alt="Profile Pics" class="img-thumbnail img-fluid" id="profilePics">
+                        <form action="'/uploads/profilePics" class="my-2" id="profilePicsForm">
+                        <input type="file" name="profilePics" id="profilePicsFile" accept="image/*">
+                        <!-- <input type="button" value="Remove Pics" id= "removeProfilePics" class="btn btn-danger btn-sm my-2" > -->
+                        </form>
+                    </div>
+                    <div>
+                        <form action="/dashboard/create-profile" method="POST">
+                            <div class="form-group">
+                                <label for="name">Enter Your Name</label>
+                                <input type="text" class="form-control" name="name" placeholder="Enter your name" id="name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Enter Your Email</label>
+                                <input type="email" class="form-control" name="email" placeholder="Enter your email" id="email" value="<%= user.email%>" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Enter a Short Title</label>
+                                <input type="text" class="form-control" name="title" placeholder="Enter a Short Title" id="title" >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="bio">Enter a Short Bio</label>
+                                <textarea class="form-control" name="bio" id="bio"></textarea>
+                            </div>
+
+                            <div>
+                                <p class="lead">Your Social Links</p>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fab fa-internet-explorer"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="website link" name="website">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="facebook link" name="facebook">
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fab fa-twitter-square"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="twitter link" name="twitter">
+                                </div>
+
+                                
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fab fa-github-square"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="github link" name="github">
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+</body>
+</html>
+
+
+
+<!-- style= "display: <%= user.profilePics.includes('default.png') ? 'none' : 'block'%>" --> -->

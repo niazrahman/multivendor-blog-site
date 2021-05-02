@@ -99,11 +99,15 @@ exports.loginPostController = async (req,res,next) =>{
 }
 
 exports.logoutController = (req,res,next) => {
+    console.log(req.session)
     req.session.destroy( err =>{
-        if(err){
-            return next(err)
-        }
-        req.flash('success','Logged out successfully')
+        if(!err){
+            
             return res.redirect('/auth/login')
+            
+        }
+        return next(err)
+        // 
+            
     })
 }

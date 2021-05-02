@@ -22,7 +22,7 @@ const middleware = [
     express.json(),
     session({
         secret : process.env.SECRET_KEY||'SECRET_KEY',
-        save : false,
+        resave : false,
         saveUninitialized : false,
         store : store
     }),

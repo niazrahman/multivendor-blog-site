@@ -16,7 +16,7 @@ exports.dashboardGetController = async (req,res,next) =>{
 
 }
 
-exports.editProfileGetController = async (req,res,next) =>{
+exports.createProfileGetController = async (req,res,next) =>{
     try{
         let profile = await Profile.findOne({user : req.user._id});
         if(profile){
@@ -27,4 +27,16 @@ exports.editProfileGetController = async (req,res,next) =>{
     catch(e){
         next(e)
     }
+}
+
+exports.createProfilePostController = (req,res,next) => {
+    next()
+}
+
+exports.editProfileGetController = (req,res,next) => {
+    next()
+}
+
+exports.editProfilePostController = (req,res,next) => {
+    next()
 }
