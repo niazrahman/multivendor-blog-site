@@ -1,4 +1,5 @@
 <%- include('../../partials/head.ejs') %>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.css"/>
 
 <div class="container-fluid">
     <div class="row">
@@ -15,7 +16,8 @@
                         <img src="<%= user.profilePics%>" alt="Profile Pics" class="img-thumbnail img-fluid" id="profilePics">
                         <form action="'/uploads/profilePics" class="my-2" id="profilePicsForm">
                         <input type="file" name="profilePics" id="profilePicsFile" accept="image/*">
-                        <!-- <input type="button" value="Remove Pics" id= "removeProfilePics" class="btn btn-danger btn-sm my-2" > -->
+                        <input type="button" value="Remove Pics" id= "removeProfilePics" class="btn btn-danger btn-sm my-2" 
+                        style = "display: <%=user.profilePics.includes('default.png') ? 'none' : 'block'%>">
                         </form>
                     </div>
                     <div>
@@ -83,17 +85,37 @@
                             </div>
                         </form>
                     </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="modal fade bd-example-modal-lg" id="crop-modal" role="dialog" aria-lebelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Resize Your Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="cropped-image"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-cropping">cancel</button>
+                <button type="button" id="upload-image" class="btn btn-primary">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>    
+
 <%- include('../../partials/footer.ejs') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script> 
+<script src="/scripts/profilePicsUpload.js"></script>
+
 </body>
 </html>
-
-
-
-<!-- style= "display: <%= user.profilePics.includes('default.png') ? 'none' : 'block'%>" --> -->

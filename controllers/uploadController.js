@@ -14,7 +14,7 @@ exports.uploadProfilePics = async (req,res,next) =>{
                 )
             }
                 await User.findOneAndUpdate(
-                    {_id = req.user._id},
+                    {_id : req.user._id},
                     {$set: {profilePics}}
                 )
                 res.status(200).json({
