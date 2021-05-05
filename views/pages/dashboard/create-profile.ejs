@@ -24,7 +24,14 @@
                         <form action="/dashboard/create-profile" method="POST">
                             <div class="form-group">
                                 <label for="name">Enter Your Name</label>
-                                <input type="text" class="form-control" name="name" placeholder="Enter your name" id="name">
+                                <input type="text"
+                                    class="form-control <%=error.name ? 'is-invalid' : ''%>" 
+                                    name="name" 
+                                    placeholder="Enter your name" 
+                                    id="name">
+                                    <div invalid-feedback>
+                                        <%= error.name %>
+                                    </div>
                             </div>
 
                             <div class="form-group">
@@ -34,13 +41,26 @@
 
                             <div class="form-group">
                                 <label for="title">Enter a Short Title</label>
-                                <input type="text" class="form-control" name="title" placeholder="Enter a Short Title" id="title" >
+                                <input type="text" 
+                                    class="form-control <%=error.title ? 'is-invalid' : ''%>" 
+                                    name="title" 
+                                    placeholder="Enter a Short Title" 
+                                    id="title" >
+                                    <div invalid-feedback>
+                                        <%= error.title %>
+                                    </div>
                             </div>
 
 
                             <div class="form-group">
                                 <label for="bio">Enter a Short Bio</label>
-                                <textarea class="form-control" name="bio" id="bio"></textarea>
+                                <textarea 
+                                    class="form-control <%=error.bio ? 'is-invalid' : ''%>"
+                                    name="bio" 
+                                    id="bio"></textarea>
+                                    <div invalid-feedback>
+                                        <%= error.bio %>
+                                    </div>
                             </div>
 
                             <div>
@@ -51,7 +71,14 @@
                                             <i class="fab fa-internet-explorer"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="website link" name="website">
+                                    <input 
+                                        type="text"
+                                        class="form-control <%= error.website ? 'is-invalid' : '' %>" 
+                                        placeholder="website link" 
+                                        name="website">
+                                        <div invalid-feedback>
+                                            <%= error.website %>
+                                        </div>
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -60,7 +87,14 @@
                                             <i class="fab fa-facebook-square"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="facebook link" name="facebook">
+                                    <input 
+                                        type="text" 
+                                        class="form-control <%= error.facebook ? 'is-invalid' : ''%>" 
+                                        placeholder="facebook link" 
+                                        name="facebook">
+                                        <div invalid-feedback>
+                                            <%= error.facebook %>
+                                        </div>
                                 </div>
 
                                 <div class="input-group mb-3">
@@ -69,7 +103,14 @@
                                             <i class="fab fa-twitter-square"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="twitter link" name="twitter">
+                                    <input 
+                                        type="text" 
+                                        class="form-control <%=error.twitter ? 'is-invalid' : '' %>" 
+                                        placeholder="twitter link" 
+                                        name="twitter">
+                                        <div invalid-feedback>
+                                            <%= error.twitter %>
+                                        </div>
                                 </div>
 
                                 
@@ -79,7 +120,14 @@
                                             <i class="fab fa-github-square"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="github link" name="github">
+                                    <input 
+                                        type="text" 
+                                        class="form-control <%= error.github?'is-invalid' : '' %>" 
+                                        placeholder="github link" 
+                                        name="github">
+                                        <div invalid-feedback>
+                                            <%= error.github %>
+                                        </div>
                                 </div>
 
                             </div>
