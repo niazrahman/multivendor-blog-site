@@ -1,6 +1,8 @@
+
+const {validationResult} = require('express-validator')
 const Flash = require('../utils/Flash');
 const Profile = require('../models/Profile');
-
+const errorFormatter = require('../utils/validationErrorFormatter')
 exports.dashboardGetController = async (req,res,next) =>{
     try{
         let profile = await Profile.findOne({user : req.user._id})
@@ -30,7 +32,10 @@ exports.createProfileGetController = async (req,res,next) =>{
 }
 
 exports.createProfilePostController = (req,res,next) => {
-    next()
+    let errors = validationResult(req).formatWith(errorFormatter)
+    console.log(errors.mapped())
+
+    res.render('pages/dashboard/create-profile', {title: 'Create Your Profile', flashMessage: Flash.getMessage(req)})
 }
 
 exports.editProfileGetController = (req,res,next) => {
