@@ -25,9 +25,10 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" name="post-thumbnail" class="custom-file-input" id="inputGroupFile">
-                            <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                            <label class="custom-file-label" for="inputGroupFile"></label>
                         </div>
                     </div>
+                    <input type="submit" class="btn btn-primary" value="Create Post">
                 </form>
             </div>
         </div>
@@ -37,7 +38,8 @@
 
 
 <%- include('../../../partials/footer.ejs') %>
-
+<script src="https://cdn.tiny.cloud/1/wkvnlnwc5ax7hdf5vzqskcjjm3ibpjm2hdkslk8nlxkzqjre/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="/scripts/tinymce.js"></script>
 <script>
     $('#inputGroupFile').on('change',function(e){
         let filename = e.target.files[0].name
