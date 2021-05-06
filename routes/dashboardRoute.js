@@ -12,5 +12,5 @@ router.get('/',isAuthenticated,dashboardGetController)
 router.get('/create-profile',isAuthenticated,createProfileGetController)
 router.post('/create-profile',isAuthenticated,profileValidator,createProfilePostController)
 router.get('/edit-profile',isAuthenticated,editProfileGetController)
-router.get('/edit-profile',isAuthenticated,editProfilePostController)
+router.get('/edit-profile',isAuthenticated,profileValidator,editProfilePostController)
 module.exports = router
