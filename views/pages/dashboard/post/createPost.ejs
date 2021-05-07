@@ -9,15 +9,21 @@
                 <form action="/post/create" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <lebel for="title">Enter Your Post Title</lebel>
-                        <input type="text" class="form-control" name="title" id="title">
+                        <input type="text" class="form-control <%= error.title ? 'is-invalid' :''%>" name="title" value="<%=value.title ? value.title : ''%>" id="title">
+                        <div>
+                            <%= error.title %>
+                        </div>
                     </div>
                     <div class="form-group">
                         <lebel for="tiny-mce-post-body">Enter Your Post Body</lebel>
-                        <textarea name="body" id="tiny-mce-post-body" class="form-control" ></textarea>
+                        <textarea name="body" id="tiny-mce-post-body"  class="form-control<%= error.body ? 'is-invalid' :''%>" ><%-value.body %></textarea>
+                        <div>
+                            <%= error.body %>
+                        </div>
                     </div>
                     <div class="form-group">
                         <lebel for="tags">Enter Some Tags(max 10)</lebel>
-                        <input type="text" name="tags" id="tags" placeholder="tag1, tag2,tag3" class="form-control">
+                        <input type="text" name="tags" value="<%=value.tags ? value.tags :'' %>" id="tags" placeholder="tag1, tag2,tag3" class="form-control">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
