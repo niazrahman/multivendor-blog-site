@@ -18,7 +18,7 @@ const routes = [
         handler : uploadRoute
     },
     {
-        path:'/posts',
+        path:'/post',
         handler : postRoute
     },
     {
