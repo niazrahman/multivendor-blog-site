@@ -15,6 +15,8 @@ module.exports = [
             if(text.length > 5000){
                 throw new Error('Body Text Can Not Be Greater Than 5000 Chars')
             }
+    body('tags')
+            .not().isEmpty().withMessage('At least One Tags Required')
 
             return true
         })

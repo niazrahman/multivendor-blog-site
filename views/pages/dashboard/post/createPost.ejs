@@ -23,7 +23,10 @@
                     </div>
                     <div class="form-group">
                         <lebel for="tags">Enter Some Tags(max 10)</lebel>
-                        <input type="text" name="tags" value="<%=value.tags ? value.tags :'' %>" id="tags" placeholder="tag1, tag2,tag3" class="form-control">
+                        <input type="text" name="tags" value="<%=value.tags ? value.tags :'' %>" id="tags" placeholder="tag1, tag2,tag3" class="form-control <%= error.tags ? 'is-invalid' :''%>">
+                        <div>
+                            <%= error.tags %>
+                        </div>
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
