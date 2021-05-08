@@ -64,3 +64,24 @@ exports.createPostPostController = async (req,res,next) =>{
         next(e)
     }
 }
+
+exports.editPostGetController = async (req,res,next) => {
+    let postId = req.params.postId
+    try{
+        let post = await Post.findOne({author : req.user._id, _id : postId})
+        if(!post){
+            let error = new Error('404 Not Found')
+            error.status = 404
+            throw new Error
+        }
+        res.render('pages/dashboard/post/editPost',{
+            title : 'Edit Your Post',
+            error: {},
+            flashMessage : Flash.getMessage(req),
+            post
+        })
+    }
+    catch(e){
+        next(e)
+    }
+}
