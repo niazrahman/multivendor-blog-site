@@ -72,7 +72,7 @@ exports.editPostGetController = async (req,res,next) => {
         if(!post){
             let error = new Error('404 Not Found')
             error.status = 404
-            throw new Error
+            throw error
         }
         res.render('pages/dashboard/post/editPost',{
             title : 'Edit Your Post',
@@ -84,4 +84,46 @@ exports.editPostGetController = async (req,res,next) => {
     catch(e){
         next(e)
     }
+}
+
+exports.editPostPostController = async (req,res,next) =>{
+    let {title,body,tags} = req.body
+    let postId = req.params.postId
+    let errors = validationResult(req).formatWith(errorFormatter)
+    
+    try{
+        let post = await Post.findOne({author : req.user._id, _id : postId})
+        if(!post){
+            let error = new Error('404 Not Found')
+            error.status = 404
+            throw error
+        }
+        if(!errors.isEmpty()){
+            res.render('pages/dashboard/post/createPost',{
+                title : "Create A New Post",
+                error : errors.mapped(),
+                flashMessage : Flash.getMessage(req),
+                post
+    
+            })
+        }
+        if(tags){
+            tags = tags.split(',')
+        }
+        let thumbnail = post.thumbnail
+        if(req.file){
+            thumbnail = `uploads/${req.file.filename}`
+        }
+
+        await Post.findOneAndUpdate(
+            {_id : post._id},
+            {$set : {title,body,tags,thumbnail}},
+            {new : true}
+        )
+        req.flash('success','Post Updated Successfully')
+        res.redirect('/post/edit/'+post._id)
+    }catch(e){
+        next(e)
+    }
+
 }

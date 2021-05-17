@@ -6,6 +6,7 @@ window.onload = function(){
         toolbar_mode: 'floating',
         tinycomments_mode: 'embedded',
         tinycomments_author: 'Author name',
+        relative_urls : false,
         height: 300,
         automatic_Uploads: true,
         images_upload_url : '/uploads/postimage',

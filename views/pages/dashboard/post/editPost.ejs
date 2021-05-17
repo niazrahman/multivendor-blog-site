@@ -5,7 +5,8 @@
     <div class="row">
         <div class="col-md-2"></div>
             <div class=" card card-body py-5 mx-5">
-                <form action="/post/create" method="POST" enctype="multipart/form-data">
+                <h5 class="my-3">Edit Your Post</h5>
+                <form action="/post/edit/<%= post._id %>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <lebel for="title">Enter Your Post Title</lebel>
                         <input type="text" class="form-control <%= error.title ? 'is-invalid' :''%>" name="title" value="<%=post.title%>" id="title">
@@ -41,7 +42,7 @@
                             <label class="custom-file-label" for="inputGroupFile"></label>
                         </div>
                     </div>
-                    <input type="submit" class="btn btn-primary" value="Create Post">
+                    <input type="submit" class="btn btn-primary" value="Update Post">
                 </form>
             </div>
         </div>
