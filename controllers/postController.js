@@ -3,6 +3,7 @@ const {validationResult} = require('express-validator')
 const errorFormatter = require('../utils/validationErrorFormatter')
 const readingTime = require('reading-time')
 const Post = require('../models/Post')
+const Profile = require('../models/Profile')
 
 exports.createPostGetController = (req,res,next) =>{
     res.render('pages/dashboard/post/createPost',{
@@ -125,5 +126,39 @@ exports.editPostPostController = async (req,res,next) =>{
     }catch(e){
         next(e)
     }
+}
 
+exports.deletePostGetController = async (req,res,next) => {
+    let {postId} = req.params
+    try{
+        let post = await Post.findOne({author : req.user._id, _id : postId})
+        if(!post){
+            let error = new Error('404 Not Found')
+            error.status = 404
+            throw error
+        }
+        await Post.findOneAndDelete({_id : postId})
+        await Profile.findOneAndUpdate(
+            {user : req.user._id},
+            {$pull : {'posts' : postId}}
+        )
+
+        req.flash('success','Post Ddeleted Successfully')
+        res.redirect('/post')
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.postGetController = async (req,res,next) => {
+    try{
+        let posts = await Post.find({author: req.user._id})
+        res.render('pages/dashboard/post/posts',{
+            title : "Your Created Post",
+            posts,
+            flashMessage : Flash.getMessage(req)
+        })
+    }catch(e){
+        next(e)
+    }
 }
