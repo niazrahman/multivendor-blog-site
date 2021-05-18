@@ -48,18 +48,28 @@ function generateFilterObject(filter){
 
 exports.explorerGetController = async (req,res,next) => {
     let filter = req.query.filter || 'latest'
+    let currentPage = parseInt(req.query.page) || 1
+    let itemPerPage = 1
+
     let {order,filterObj} = generateFilterObject(filter.toLowerCase()) 
     try{
         let posts = await Post.find(filterObj)
             .populate('author', 'username')
             .sort(order === 1 ? '-createdAt' : 'createdAt')
+            .skip((itemPerPage * currentPage) - itemPerPage)
+            .limit(itemPerPage)
 
-            
+        let totalPost = await Post.countDocuments()
+        let totalPage = totalPost / itemPerPage
+
         res.render('pages/explorer/explorer',{
             title : 'Explore All Posts',
             filter,
             flashMessage : Flash.getMessage(req),
-            posts
+            posts,
+            itemPerPage,
+            currentPage,
+            totalPage
         })
     }catch(e){
         next(e)
