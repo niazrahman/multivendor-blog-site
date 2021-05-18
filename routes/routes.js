@@ -4,6 +4,7 @@ const playgroundRoute = require('../playground/play')
 const uploadRoute = require('./uploadRoute')
 const postRoute = require('./postRoute')
 const apiRoutes = require('../api/routes/apiRoutes')
+const exploreRoute = require('./exploreRoute')
 
 const routes = [
     {
@@ -21,6 +22,10 @@ const routes = [
     {
         path:'/post',
         handler : postRoute
+    },
+    {
+        path : '/explorer',
+        handler : exploreRoute
     },
     {
         path : '/api',

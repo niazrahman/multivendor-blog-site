@@ -23,4 +23,4 @@ router.get('/dislikes/:postId', isAuthenticated, dislikesGetController)
 router.get('/bookmarks/:postId',isAuthenticated,bookmarksGetController)
 
 
-module.expports = router
+module.exports = router
