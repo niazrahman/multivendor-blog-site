@@ -1,0 +1,56 @@
+<%- include('../../partials/head.ejs') %>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card card-body">
+                <section>
+                    <h3><%=post.title %></h3>
+                    <div class="d-flex">
+                        <small>
+                            <%= moment(post.createdAt) %>,
+                            postedBy <%=post.author.username %>,
+                            <%= post.readTime %>
+                        </small>
+
+                        <% if(user){ %>
+                            <span class="ml-auto bookmark"  data-post="<%= post._id %>" >
+                                <% if(bookmarks.includes(post._id)) { %>
+                                    <i class="fas fa-bookmark"></i>
+                                <% } else { %>
+                                    <i class="far fa-bookmark"></i>
+                                <% } %>
+                            </span>
+                        <% } %>
+                    </div>
+                    <% if(post.thumbnail){ %>
+                        <img class="img-fluid mb-2" src="<%=post.thumbnail %>" alt="">
+                    <% } %>
+                    <section>
+                        <%-post.body %>
+                    </section>
+                    <section>
+                        <%if(!user){ %>
+                            <button class="btn btn-success btn-sm" disabled>
+                                Like (<%=post.likes.length %>)
+                            </button>
+                            <button class="btn btn-danger btn-sm" disabled>
+                                Dislike(<%=post.dislikes.length %>)
+                            </button>
+                            <p class="text-center text-muted">To Like And Comment Please <a href="/auth/login">Login</a>
+                            </p>
+                        <% } else{ %>
+                        <% } %>
+                    </section>
+                </section>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include('../../partials/footer.ejs') %>
+<script src="/scripts/bookmarks.js"></script>
+
+</body>
+</html>
