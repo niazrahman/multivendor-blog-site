@@ -3,6 +3,13 @@ const express = require('express')
 const mongoose = require('mongoose')
 const config = require('config')
 const chalk = require('chalk')
+const cors = require('cors')
+
+
+const app = express() 
+
+app.use(cors());
+
 const setMiddleware = require('./middleware/middleware')
 
 // import routes
@@ -14,7 +21,7 @@ dotEnv.config({path:'./config.env'})
 
 const MONGODB_URI = `mongodb://${process.env.DB_ADMIN}:${process.env.DB_PASSWORD}@cluster0-shard-00-00.vrfoh.mongodb.net:27017,cluster0-shard-00-01.vrfoh.mongodb.net:27017,cluster0-shard-00-02.vrfoh.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-mlimxa-shard-0&authSource=admin&retryWrites=true&w=majority`
 
-const app = express() 
+
 // setup view engine 
 app.set('view engine','ejs')
 app.set('views','views')
