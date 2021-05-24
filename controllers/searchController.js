@@ -8,7 +8,7 @@ exports.searchResultGetController = async (req,res,next) => {
     let itemPerPage = 10
 
     try{
-        let post = await Post.find({
+        let posts = await Post.find({
             $text :{
                 $search : term
             }
@@ -29,7 +29,8 @@ exports.searchResultGetController = async (req,res,next) => {
             searchTerm : term,
             itemPerPage,
             currentPage,
-            totalPage
+            totalPage,
+            posts
         })
 
     }catch(e){
