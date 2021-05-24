@@ -3,6 +3,7 @@ const {validationResult} = require('express-validator')
 const Flash = require('../utils/Flash');
 const Profile = require('../models/Profile');
 const User = require('../models/User')
+const Comment = require('../models/Comment');
 const errorFormatter = require('../utils/validationErrorFormatter')
 exports.dashboardGetController = async (req,res,next) =>{
     try{
@@ -168,6 +169,32 @@ exports.bookmarksGetController = async (req, res,next) =>{
                 title : 'My Bookmarks',
                 flashMessage : Flash.getMessage(req),
                 posts : profile.bookmarks
+            })
+    }catch(e){
+        next(e)
+    }
+}
+
+exports.commentsGetController = async (req,res,next) =>{
+    try{
+        let profile = await Profile.findOne({user : req.user._id})
+        let comments = await Comment.find({post : {$in : profile.posts}})
+            .populate({
+                path : 'post',
+                select : 'title'
+            })
+            .populate({
+                path : 'user',
+                select : 'username profilePics'
+            })
+            .populate ({
+                path : 'replies.user',
+                select : 'username profilePics'
+            })
+            res.render('pages/dashboard/comments',{
+                title : 'My Recent Comments',
+                flashMessage : Flash.getMessage(req) ,
+                comments
             })
     }catch(e){
         next(e)
