@@ -6,11 +6,13 @@ const {
     createProfileGetController,
     createProfilePostController,
     editProfileGetController,
-    editProfilePostController
+    editProfilePostController,
+    bookmarksGetController
 } = require('../controllers/dashboardController')
-router.get('/',isAuthenticated,dashboardGetController)
+router.get('/bookmarks',isAuthenticated,bookmarksGetController)
 router.get('/create-profile',isAuthenticated,createProfileGetController)
 router.post('/create-profile',isAuthenticated,profileValidator,createProfilePostController)
 router.get('/edit-profile',isAuthenticated,editProfileGetController)
 router.get('/edit-profile',isAuthenticated,profileValidator,editProfilePostController)
+router.get('/',isAuthenticated,dashboardGetController)
 module.exports = router
