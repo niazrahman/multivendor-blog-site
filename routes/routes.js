@@ -6,6 +6,7 @@ const postRoute = require('./postRoute')
 const searchRoute = require('./searchRoute')
 const apiRoutes = require('../api/routes/apiRoutes')
 const exploreRoute = require('./exploreRoute')
+const authorRoute = require('./authorRoute')
 
 const routes = [
     {
@@ -27,6 +28,10 @@ const routes = [
     {
         path : '/explorer',
         handler : exploreRoute
+    },
+    {
+        path : '/author',
+        handler : authorRoute
     },
     {
         path :'/',
