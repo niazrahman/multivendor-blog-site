@@ -60,7 +60,7 @@ exports.createPostPostController = async (req,res,next) =>{
             {$push : {'post' : createdPost._id}}
         )
         req.flash('success','Post created successfully')
-        return res.redirect(`post/edit/${createdPost._id}`)
+        return res.redirect(`/post/edit/${createdPost._id}`)
     }catch(e){
         next(e)
     }

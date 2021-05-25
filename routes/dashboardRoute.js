@@ -15,6 +15,6 @@ router.get('/comments',commentsGetController)
 router.get('/create-profile',isAuthenticated,createProfileGetController)
 router.post('/create-profile',isAuthenticated,profileValidator,createProfilePostController)
 router.get('/edit-profile',isAuthenticated,editProfileGetController)
-router.get('/edit-profile',isAuthenticated,profileValidator,editProfilePostController)
+router.post('/edit-profile',isAuthenticated,profileValidator,editProfilePostController)
 router.get('/',isAuthenticated,dashboardGetController)
 module.exports = router

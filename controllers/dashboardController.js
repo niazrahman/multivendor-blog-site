@@ -109,6 +109,7 @@ exports.editProfileGetController = async (req,res,next) => {
 }
 
 exports.editProfilePostController =async (req,res,next) => {
+    console.log(req)
     let errors = validationResult(req).formatWith(errorFormatter)
     let {
         name,
