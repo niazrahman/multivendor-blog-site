@@ -3,17 +3,18 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div class="d-flex">
+            <div>
                 <div>
                     <img src="<%= author.profilePics %>" alt="" class="img-thumbnail img-fluid">
                 </div>
                 <div>
-                    Name : <strong><%= author.profile.name %></strong>
-                    Title : <strong><%= author.profile.title %></strong>
-                    Bio : <strong><%= author.profile.bio %></strong>
+                    <p>Name : <strong><%= author.profile.name %></strong></p>
+                    <p>Title : <strong><%= author.profile.title %></strong></p>
+                    <p>Title : <strong><%= author.profile.title %></strong></p>
                 </div>
 
                 <div>
+                    Social Links :
                     <%if(author.profile.links.website){%>
                         <span>
                             <a href="<%= author.profile.links.website%>" target="_blank">

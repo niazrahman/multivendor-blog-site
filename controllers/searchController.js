@@ -4,6 +4,7 @@ const Flash = require('../utils/Flash')
 exports.searchResultGetController = async (req,res,next) => {
 
     let term = req.query.term
+    console.log(req.query)
     let currentPage = req.query.page || 1
     let itemPerPage = 10
 

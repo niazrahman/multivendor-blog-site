@@ -34,7 +34,7 @@ const routes = [
         handler : authorRoute
     },
     {
-        path :'/',
+        path :'/search',
         handler : searchRoute
     },
     {
@@ -48,10 +48,7 @@ const routes = [
     {
         path : '/',
         handler : (req,res) => {
-
-            res.json({
-                message : 'Welcome'
-            })
+            res.redirect('/explorer')
     }
 }
 ]
